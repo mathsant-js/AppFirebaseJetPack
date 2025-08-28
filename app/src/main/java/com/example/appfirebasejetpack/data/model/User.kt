@@ -1,4 +1,4 @@
-package com.example.appfirebasejetpack.model
+package com.example.appfirebasejetpack.data.model
 
 data class User(
     val id: String = "",
