@@ -29,5 +29,11 @@ object FirebaseRepository {
         })
     }
 
-
+    fun updateUser(id: String, nome: String, email: String, telefone: String, mensagem: String) {
+        val updates = mapOf(
+            "nome" to nome,
+            "email" to email
+        )
+        usuariosRef.child(id).updateChildren(updates)
+    }
 }
