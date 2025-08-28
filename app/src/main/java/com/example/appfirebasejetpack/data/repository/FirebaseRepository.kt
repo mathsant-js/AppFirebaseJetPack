@@ -36,4 +36,8 @@ object FirebaseRepository {
         )
         usuariosRef.child(id).updateChildren(updates)
     }
+
+    fun deleteUser(id: String) {
+        usuariosRef.child(id).removeValue()
+    }
 }
