@@ -1,13 +1,16 @@
 package com.example.appfirebasejetpack.ui.screens
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.R
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
@@ -16,9 +19,12 @@ import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.ExitToApp
 import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material.icons.filled.Settings
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonColors
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
+import androidx.compose.material3.ElevatedButton
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -51,7 +57,7 @@ import com.example.appfirebasejetpack.viewmodel.AuthViewModel
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun Dashboard(
-    modifier: Modifier = Modifier,
+    modifier: Modifier,
     /*navController: NavController,
     authViewModel: AuthViewModel
      */
@@ -60,12 +66,12 @@ fun Dashboard(
     Scaffold(
         topBar = {
             CenterAlignedTopAppBar(
-                title = { Text(text = "Usuários do Sistema", color = Color.Gray) },
+                title = { Text(text = "Usuários do Sistema", color = Color.Black) },
                 navigationIcon = {
                     IconButton(onClick = {
                         TODO()
                     }) {
-                        Icon(Icons.Filled.ArrowBack, contentDescription = "Voltar", tint = Color.Gray)
+                        Icon(Icons.Filled.ArrowBack, contentDescription = "Voltar", tint = Color.Black)
                     }
                 },
                 actions = {
@@ -96,7 +102,19 @@ fun Dashboard(
             )
             Text(text = "Bem-Vindo!", fontSize = 40.sp)
 
-            TODO("Chamar função para listar os usuários")
+            Spacer(modifier = Modifier.height(16.dp))
+
+            ElevatedButton(
+                onClick = {},
+                colors = ButtonColors(
+                    containerColor = Color.Cyan,
+                    contentColor = Color.White,
+                    disabledContentColor = Color.White,
+                    disabledContainerColor = Color.Cyan
+                )
+            ) {
+                Text(text = "Criar Usuário")
+            }
         }
     }
 
