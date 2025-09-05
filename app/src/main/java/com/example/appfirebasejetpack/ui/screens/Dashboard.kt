@@ -36,6 +36,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.ModalBottomSheet
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedCard
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
@@ -115,16 +116,17 @@ fun Dashboard(
 
             Spacer(modifier = Modifier.height(16.dp))
 
-            ElevatedButton(
+            OutlinedButton(
                 onClick = {},
                 colors = ButtonColors(
-                    containerColor = Color.Cyan,
+                    containerColor = Color(26,26,26),
                     contentColor = Color.White,
-                    disabledContentColor = Color.White,
-                    disabledContainerColor = Color.Cyan
-                )
+                    disabledContentColor = Color.Cyan,
+                    disabledContainerColor = Color(26,26,26)
+                ),
+                border = BorderStroke(1.dp, Color.Cyan)
             ) {
-                Text(text = "Criar Usuário")
+                Text(text = "Criar Usuário", color = Color.Cyan)
             }
             Spacer(modifier = Modifier.height(16.dp))
 
@@ -215,9 +217,27 @@ fun CardUser(
                     .fillMaxWidth()
                     .padding(16.dp, top = 22.dp)
             ) {
-                Text(text = "Nome:", color = Color.Cyan)
-                Text(text = "Email:", color = Color.Cyan)
-                Text(text = "Telefone:", color = Color.Cyan)
+                Row {
+                    Text(text = "Nome:", color = Color.Cyan)
+                }
+                Row(
+                    Modifier
+                        .padding(top = 5.dp)
+                ) {
+                    Text(text = "Email:", color = Color.Cyan)
+                }
+                Row(
+                    Modifier
+                        .padding(top = 5.dp)
+                ) {
+                    Text(text = "Telefone:", color = Color.Cyan)
+                }
+                Row(
+                    Modifier
+                        .padding(top = 5.dp)
+                ) {
+                    Text(text = "Mensagem:", color = Color.Cyan)
+                }
             }
         }
     }
