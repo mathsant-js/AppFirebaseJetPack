@@ -8,7 +8,7 @@ import com.google.firebase.database.ValueEventListener
 
 object FirebaseRepository {
     private val database = FirebaseDatabase.getInstance()
-    private val usuariosRef = database.getReference("usuarios")
+    private val usuariosRef = database.getReference("users")
 
     fun addUser(nome: String, email: String, telefone: String, mensagem: String) {
         val id = usuariosRef.push().key ?: return
