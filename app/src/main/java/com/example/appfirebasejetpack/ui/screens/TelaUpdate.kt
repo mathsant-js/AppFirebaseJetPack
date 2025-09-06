@@ -33,12 +33,15 @@ import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.example.appfirebasejetpack.ui.navigation.Routes
+import com.example.appfirebasejetpack.viewmodel.AuthViewModel
 import java.lang.reflect.Modifier
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TelaUpdate(
-    navController: NavController
+    navController: NavController,
+    authViewModel: AuthViewModel
 ) {
     var nome by remember { mutableStateOf(TextFieldValue("")) }
     var email by remember { mutableStateOf(TextFieldValue("")) }
@@ -50,7 +53,7 @@ fun TelaUpdate(
                 title = { Text(text = "Atualizar Usuário", color = Color.Black) },
                 navigationIcon = {
                     IconButton(onClick = {
-                        // Voltar a tela anterior
+                        navController.popBackStack()
                     }) {
                         Icon(
                             Icons.AutoMirrored.Filled.ArrowBack,
@@ -63,7 +66,8 @@ fun TelaUpdate(
                     MenuUsuario(
                         onCriar = {},
                         onSair = {
-                            navController.popBackStack()
+                            authViewModel.signout()
+                            navController.navigate(Routes.TelaLogin)
                         }
                     )
                 },

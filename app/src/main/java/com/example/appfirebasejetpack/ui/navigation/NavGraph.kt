@@ -28,10 +28,10 @@ fun AppNavGraph(modifier: Modifier = Modifier, navController: NavHostController,
             Dashboard(modifier, navController, authViewModel)
         }
         composable(Routes.TelaCreate) {
-            TelaCreate(modifier, navController)
+            TelaCreate(modifier, navController, authViewModel)
         }
         composable(Routes.TelaUpdate) {
-            TelaUpdate(navController)
+            TelaUpdate(navController, authViewModel)
         }
     }
 }

@@ -75,17 +75,21 @@ fun Dashboard(
                 title = { Text(text = "Usuários do Sistema", color = Color.Black) },
                 navigationIcon = {
                     IconButton(onClick = {
-                        // Voltar para o login e desauntenticar
+                        authViewModel.signout()
+                        navController.navigate(Routes.TelaLogin)
                     }) {
                         Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Voltar", tint = Color.Black)
                     }
                 },
                 actions = {
                     MenuUsuario(
-                        onCriar = {},
+                        onCriar = {
+                            navController.navigate(Routes.TelaCreate)
+                        },
                         onSair = {
-                            // Chamar a função de signout
-                            }
+                            authViewModel.signout()
+                            navController.navigate(Routes.TelaLogin)
+                        }
                    )
                },
                colors = TopAppBarDefaults.topAppBarColors(

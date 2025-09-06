@@ -36,12 +36,15 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.appfirebasejetpack.data.repository.FirebaseRepository
+import com.example.appfirebasejetpack.ui.navigation.Routes
+import com.example.appfirebasejetpack.viewmodel.AuthViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TelaCreate(
     modifier: Modifier,
-    navControler: NavController
+    navController: NavController,
+    authViewModel: AuthViewModel
 ) {
     var repo = remember { FirebaseRepository() }
     var nome by remember { mutableStateOf("") }
@@ -54,7 +57,7 @@ fun TelaCreate(
                 title = { Text(text = "Criar Usuário", color = Color.Black) },
                 navigationIcon = {
                     IconButton(onClick = {
-                        navControler.popBackStack()
+                        navController.popBackStack()
                     }) {
                         Icon(
                             Icons.AutoMirrored.Filled.ArrowBack,
@@ -67,7 +70,8 @@ fun TelaCreate(
                     MenuUsuario(
                         onCriar = {},
                         onSair = {
-                            // Chamar a função de signout
+                            authViewModel.signout()
+                            navController.navigate(Routes.TelaLogin)
                         }
                     )
                 },
