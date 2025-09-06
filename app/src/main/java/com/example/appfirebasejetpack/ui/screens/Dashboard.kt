@@ -51,13 +51,14 @@ import androidx.navigation.NavController
 import com.example.appfirebasejetpack.data.model.User
 import com.example.appfirebasejetpack.data.repository.FirebaseRepository
 import com.example.appfirebasejetpack.ui.navigation.Routes
+import com.example.appfirebasejetpack.viewmodel.AuthViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun Dashboard(
     modifier: Modifier,
     navController: NavController,
-    // authViewModel: AuthViewModel
+    authViewModel: AuthViewModel
 ) {
     val repo = remember { FirebaseRepository() }
     var listaUsuarios by remember { mutableStateOf(listOf<User>()) }
@@ -74,7 +75,7 @@ fun Dashboard(
                 title = { Text(text = "Usuários do Sistema", color = Color.Black) },
                 navigationIcon = {
                     IconButton(onClick = {
-                        // Voltar a tela anterior
+                        // Voltar para o login e desauntenticar
                     }) {
                         Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Voltar", tint = Color.Black)
                     }

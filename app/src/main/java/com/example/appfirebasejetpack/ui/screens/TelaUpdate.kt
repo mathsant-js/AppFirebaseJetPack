@@ -32,12 +32,13 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import java.lang.reflect.Modifier
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TelaUpdate(
-
+    navController: NavController
 ) {
     var nome by remember { mutableStateOf(TextFieldValue("")) }
     var email by remember { mutableStateOf(TextFieldValue("")) }
@@ -62,7 +63,7 @@ fun TelaUpdate(
                     MenuUsuario(
                         onCriar = {},
                         onSair = {
-                            // Chamar a função de signout
+                            navController.popBackStack()
                         }
                     )
                 },
@@ -229,8 +230,10 @@ fun TelaUpdate(
     }
 }
 
+/*
 @Preview
 @Composable
 fun TelaUpdatePreview() {
     TelaUpdate()
 }
+ */

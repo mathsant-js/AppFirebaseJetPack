@@ -34,12 +34,14 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import com.example.appfirebasejetpack.data.repository.FirebaseRepository
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TelaCreate(
-    modifier: Modifier
+    modifier: Modifier,
+    navControler: NavController
 ) {
     var repo = remember { FirebaseRepository() }
     var nome by remember { mutableStateOf("") }
@@ -52,7 +54,7 @@ fun TelaCreate(
                 title = { Text(text = "Criar Usuário", color = Color.Black) },
                 navigationIcon = {
                     IconButton(onClick = {
-                        // Voltar a tela anterior
+                        navControler.popBackStack()
                     }) {
                         Icon(
                             Icons.AutoMirrored.Filled.ArrowBack,
