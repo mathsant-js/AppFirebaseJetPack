@@ -34,16 +34,18 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.appfirebasejetpack.data.repository.FirebaseRepository
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TelaCreate(
     modifier: Modifier
 ) {
-    var nome by remember { mutableStateOf(TextFieldValue("")) }
-    var email by remember { mutableStateOf(TextFieldValue("")) }
-    var telefone by remember { mutableStateOf(TextFieldValue("")) }
-    var mensagem by remember { mutableStateOf(TextFieldValue("")) }
+    var repo = remember { FirebaseRepository() }
+    var nome by remember { mutableStateOf("") }
+    var email by remember { mutableStateOf("") }
+    var telefone by remember { mutableStateOf("") }
+    var mensagem by remember { mutableStateOf("") }
     Scaffold(
         topBar = {
             CenterAlignedTopAppBar(
@@ -214,7 +216,15 @@ fun TelaCreate(
                     .padding(16.dp)
             ) {
                 OutlinedButton(
-                    onClick = {},
+                    onClick = {
+                        if (nome.isNotBlank() && email.isNotBlank()) {
+                           repo.addUser(nome, email, telefone, mensagem)
+                           nome = ""
+                           email = ""
+                           telefone = ""
+                           mensagem = ""
+                        }
+                    },
                     colors = ButtonColors(
                         containerColor = Color(26,26,26),
                         contentColor = Color.White,
@@ -230,8 +240,10 @@ fun TelaCreate(
     }
 }
 
+/*
 @Preview
 @Composable
 fun TelaCreatePreview() {
     TelaCreate(modifier = Modifier)
 }
+*/
