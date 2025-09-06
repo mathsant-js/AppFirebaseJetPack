@@ -7,6 +7,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.appfirebasejetpack.ui.screens.Dashboard
 import com.example.appfirebasejetpack.ui.screens.TelaCadastro
+import com.example.appfirebasejetpack.ui.screens.TelaCreate
 import com.example.appfirebasejetpack.ui.screens.TelaLogin
 import com.example.appfirebasejetpack.viewmodel.AuthViewModel
 
@@ -24,6 +25,9 @@ fun AppNavGraph(modifier: Modifier = Modifier, navController: NavHostController,
         }
         composable(Routes.Dashboard) {
             Dashboard(modifier)
+        }
+        composable(Routes.TelaCreate) {
+            TelaCreate(modifier)
         }
     }
 }

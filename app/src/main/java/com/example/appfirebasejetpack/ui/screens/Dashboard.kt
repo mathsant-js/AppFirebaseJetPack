@@ -80,7 +80,7 @@ fun Dashboard(
                 title = { Text(text = "Usuários do Sistema", color = Color.Black) },
                 navigationIcon = {
                     IconButton(onClick = {
-                        TODO()
+                        // Voltar a tela anterior
                     }) {
                         Icon(Icons.Filled.ArrowBack, contentDescription = "Voltar", tint = Color.Black)
                     }
@@ -88,163 +88,165 @@ fun Dashboard(
                 actions = {
                     MenuUsuario(
                         onCriar = {},
-                        onSair = { TODO("Chamar a função de signout") }
-                    )
-                },
-                colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = Color.Cyan
-                )
-            )
-        }
-    ) {
-        padding ->
-        Column (
-            Modifier
-                .background(Color(26,26,26))
-                .fillMaxSize()
-                .padding(padding)
-                .padding(16.dp),
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            Icon(
-                Icons.Filled.AccountCircle,
-                contentDescription = "Usuário",
-                tint = Color.Gray,
-                modifier = Modifier.size(150.dp)
-            )
-            Text(text = "Bem-Vindo!", fontSize = 40.sp, color = Color.White)
+                        onSair = {
+                            // Chamar a função de signout
+                            }
+                   )
+               },
+               colors = TopAppBarDefaults.topAppBarColors(
+                   containerColor = Color.Cyan
+               )
+           )
+       }
+   ) {
+       padding ->
+       Column (
+           Modifier
+               .background(Color(26,26,26))
+               .fillMaxSize()
+               .padding(padding)
+               .padding(16.dp),
+           horizontalAlignment = Alignment.CenterHorizontally
+       ) {
+           Icon(
+               Icons.Filled.AccountCircle,
+               contentDescription = "Usuário",
+               tint = Color.Gray,
+               modifier = Modifier.size(150.dp)
+           )
+           Text(text = "Bem-Vindo!", fontSize = 40.sp, color = Color.White)
 
-            Spacer(modifier = Modifier.height(16.dp))
+           Spacer(modifier = Modifier.height(16.dp))
 
-            OutlinedButton(
-                onClick = {},
-                colors = ButtonColors(
-                    containerColor = Color(26,26,26),
-                    contentColor = Color.White,
-                    disabledContentColor = Color.Cyan,
-                    disabledContainerColor = Color(26,26,26)
-                ),
-                border = BorderStroke(1.dp, Color.Cyan)
-            ) {
-                Text(text = "Criar Usuário", color = Color.Cyan)
-            }
-            Spacer(modifier = Modifier.height(16.dp))
+           OutlinedButton(
+               onClick = {},
+               colors = ButtonColors(
+                   containerColor = Color(26,26,26),
+                   contentColor = Color.White,
+                   disabledContentColor = Color.Cyan,
+                   disabledContainerColor = Color(26,26,26)
+               ),
+               border = BorderStroke(1.dp, Color.Cyan)
+           ) {
+               Text(text = "Criar Usuário", color = Color.Cyan)
+           }
+           Spacer(modifier = Modifier.height(16.dp))
 
-            CardUser(onEditClick = {}, onDeleteClick = {})
-        }
-    }
+           CardUser(onEditClick = {}, onDeleteClick = {})
+       }
+   }
 
 }
 
 @Composable
 fun MenuUsuario(
-    onCriar: () -> Unit,
-    onSair: () -> Unit
+   onCriar: () -> Unit,
+   onSair: () -> Unit
 ) {
-    var expanded by remember { mutableStateOf(false) }
+   var expanded by remember { mutableStateOf(false) }
 
-    Box {
-        // Botão que abre o menu
-        IconButton(onClick = { expanded = true }) {
-            Icon(
-                imageVector = Icons.Default.MoreVert, // 3 pontinhos
-                contentDescription = "Menu"
-            )
-        }
+   Box {
+       // Botão que abre o menu
+       IconButton(onClick = { expanded = true }) {
+           Icon(
+               imageVector = Icons.Default.MoreVert, // 3 pontinhos
+               contentDescription = "Menu"
+           )
+       }
 
-        // Menu suspenso
-        DropdownMenu(
-            expanded = expanded,
-            onDismissRequest = { expanded = false }
-        ) {
-            DropdownMenuItem(
-                text = { Text("Criar") },
-                onClick = {
-                    expanded = false
-                    onCriar()
-                }
-            )
-            DropdownMenuItem(
-                text = { Text("Sair da Conta") },
-                onClick = {
-                    expanded = false
-                    onSair()
-                }
-            )
-        }
-    }
+       // Menu suspenso
+       DropdownMenu(
+           expanded = expanded,
+           onDismissRequest = { expanded = false }
+       ) {
+           DropdownMenuItem(
+               text = { Text("Criar") },
+               onClick = {
+                   expanded = false
+                   onCriar()
+               }
+           )
+           DropdownMenuItem(
+               text = { Text("Sair da Conta") },
+               onClick = {
+                   expanded = false
+                   onSair()
+               }
+           )
+       }
+   }
 }
 
 @Composable
 fun CardUser(
-    onEditClick: () -> Unit,
-    onDeleteClick: () -> Unit
+   onEditClick: () -> Unit,
+   onDeleteClick: () -> Unit
 ) {
-    // Alinhar o texto com os ícones
-    OutlinedCard(
-        colors = CardDefaults.cardColors(
-            containerColor = Color(28,28,28)
-        ),
-        elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),
-        shape = RoundedCornerShape(12.dp),
-        border = BorderStroke(0.5.dp, Color.Cyan),
-        modifier = Modifier
-            .size(width = 300.dp, height = 150.dp)
-    ) {
-        Box(modifier = Modifier.fillMaxWidth()) {
-            Row(
-                modifier = Modifier
-                    .align(Alignment.TopEnd)
-                    .padding(8.dp)
-            ) {
-                IconButton(onClick = onEditClick) {
-                    Icon(
-                        imageVector = Icons.Default.Edit,
-                        contentDescription = "Editar",
-                        tint = Color.Cyan
-                    )
-                }
-                IconButton(onClick = onDeleteClick) {
-                    Icon(
-                        imageVector = Icons.Default.Delete,
-                        contentDescription = "Excluir",
-                        tint = Color.Cyan
-                    )
-                }
-            }
-            Column(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(16.dp, top = 22.dp)
-            ) {
-                Row {
-                    Text(text = "Nome:", color = Color.Cyan)
-                }
-                Row(
-                    Modifier
-                        .padding(top = 5.dp)
-                ) {
-                    Text(text = "Email:", color = Color.Cyan)
-                }
-                Row(
-                    Modifier
-                        .padding(top = 5.dp)
-                ) {
-                    Text(text = "Telefone:", color = Color.Cyan)
-                }
-                Row(
-                    Modifier
-                        .padding(top = 5.dp)
-                ) {
-                    Text(text = "Mensagem:", color = Color.Cyan)
-                }
-            }
-        }
-    }
+   // Alinhar o texto com os ícones
+   OutlinedCard(
+       colors = CardDefaults.cardColors(
+           containerColor = Color(28,28,28)
+       ),
+       elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),
+       shape = RoundedCornerShape(12.dp),
+       border = BorderStroke(0.5.dp, Color.Cyan),
+       modifier = Modifier
+           .size(width = 300.dp, height = 150.dp)
+   ) {
+       Box(modifier = Modifier.fillMaxWidth()) {
+           Row(
+               modifier = Modifier
+                   .align(Alignment.TopEnd)
+                   .padding(8.dp)
+           ) {
+               IconButton(onClick = onEditClick) {
+                   Icon(
+                       imageVector = Icons.Default.Edit,
+                       contentDescription = "Editar",
+                       tint = Color.Cyan
+                   )
+               }
+               IconButton(onClick = onDeleteClick) {
+                   Icon(
+                       imageVector = Icons.Default.Delete,
+                       contentDescription = "Excluir",
+                       tint = Color.Cyan
+                   )
+               }
+           }
+           Column(
+               modifier = Modifier
+                   .fillMaxWidth()
+                   .padding(16.dp, top = 22.dp)
+           ) {
+               Row {
+                   Text(text = "Nome:", color = Color.Cyan)
+               }
+               Row(
+                   Modifier
+                       .padding(top = 5.dp)
+               ) {
+                   Text(text = "Email:", color = Color.Cyan)
+               }
+               Row(
+                   Modifier
+                       .padding(top = 5.dp)
+               ) {
+                   Text(text = "Telefone:", color = Color.Cyan)
+               }
+               Row(
+                   Modifier
+                       .padding(top = 5.dp)
+               ) {
+                   Text(text = "Mensagem:", color = Color.Cyan)
+               }
+           }
+       }
+   }
 }
 
 @Preview
 @Composable
 fun DashboardPreview() {
-    Dashboard(modifier = Modifier)
+   Dashboard(modifier = Modifier)
 }
