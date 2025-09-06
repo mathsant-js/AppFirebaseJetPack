@@ -25,7 +25,7 @@ fun AppNavGraph(modifier: Modifier = Modifier, navController: NavHostController,
             TelaCadastro(modifier, navController, authViewModel)
         }
         composable(Routes.Dashboard) {
-            Dashboard(modifier)
+            Dashboard(modifier, navController)
         }
         composable(Routes.TelaCreate) {
             TelaCreate(modifier)
