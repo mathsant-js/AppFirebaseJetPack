@@ -9,6 +9,7 @@ import com.example.appfirebasejetpack.ui.screens.Dashboard
 import com.example.appfirebasejetpack.ui.screens.TelaCadastro
 import com.example.appfirebasejetpack.ui.screens.TelaCreate
 import com.example.appfirebasejetpack.ui.screens.TelaLogin
+import com.example.appfirebasejetpack.ui.screens.TelaUpdate
 import com.example.appfirebasejetpack.viewmodel.AuthViewModel
 
 @Composable
@@ -28,6 +29,9 @@ fun AppNavGraph(modifier: Modifier = Modifier, navController: NavHostController,
         }
         composable(Routes.TelaCreate) {
             TelaCreate(modifier)
+        }
+        composable(Routes.TelaUpdate) {
+            TelaUpdate()
         }
     }
 }

@@ -5,4 +5,5 @@ object Routes {
     const val TelaCadastro = "telaCadastro"
     const val Dashboard = "dashboard"
     const val TelaCreate = "telaCreate"
+    const val TelaUpdate = "teleUpdate"
 }
