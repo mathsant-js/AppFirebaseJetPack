@@ -135,7 +135,7 @@ fun Dashboard(
                usuarios = listaUsuarios,
                onEditClick = { usuario ->
                    usuario.id.let { id ->
-                       navController.navigate("telaUpdate/$id")
+                       navController.navigate(Routes.telaUpdate(id))
                    }
                },
                onDeleteClick = { usuario -> }
