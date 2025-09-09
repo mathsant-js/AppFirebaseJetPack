@@ -64,6 +64,7 @@ fun Dashboard(
     var listaUsuarios by remember { mutableStateOf(listOf<User>()) }
 
     var usuarioParaDeletar by remember { mutableStateOf<User?>(null) }
+    var sairConta by remember { mutableStateOf(false)}
 
     LaunchedEffect(Unit) {
         repo.showUsers { lista ->
@@ -77,8 +78,7 @@ fun Dashboard(
                 title = { Text(text = "Usuários do Sistema", color = Color.Black) },
                 navigationIcon = {
                     IconButton(onClick = {
-                        authViewModel.signout()
-                        navController.navigate(Routes.TelaLogin)
+                        sairConta = true
                     }) {
                         Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Voltar", tint = Color.Black)
                     }
@@ -89,8 +89,7 @@ fun Dashboard(
                             navController.navigate(Routes.TelaCreate)
                         },
                         onSair = {
-                            authViewModel.signout()
-                            navController.navigate(Routes.TelaLogin)
+                            sairConta = true
                         }
                    )
                },
@@ -171,7 +170,30 @@ fun Dashboard(
            }
        }
    }
-
+    if (sairConta) {
+        AlertDialog(
+            onDismissRequest = { sairConta = false },
+            title = { Text("Sair da Conta") },
+            text = { Text("Tem certeza que deseja sair da conta?") },
+            containerColor = Color(30,30,30),
+            confirmButton = {
+                TextButton(
+                    onClick = {
+                        authViewModel.signout()
+                        navController.navigate(Routes.TelaLogin)
+                        sairConta = false
+                    }
+                ) {
+                    Text("Confimar", color = Color.Red)
+                }
+            },
+            dismissButton = {
+                TextButton(onClick = { sairConta = false }) {
+                    Text("Cancelar")
+                }
+            }
+        )
+    }
 }
 
 @Composable
