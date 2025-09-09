@@ -43,7 +43,7 @@ fun TelaCreate(
     navController: NavController,
     authViewModel: AuthViewModel
 ) {
-    var repo = remember { FirebaseRepository() }
+    val repo = remember { FirebaseRepository() }
     var nome by remember { mutableStateOf("") }
     var email by remember { mutableStateOf("") }
     var telefone by remember { mutableStateOf("") }
@@ -79,7 +79,7 @@ fun TelaCreate(
         }
     ) { padding ->
         Column(
-            Modifier
+            modifier
                 .background(Color(26, 26, 26))
                 .fillMaxSize()
                 .padding(padding)
@@ -87,7 +87,7 @@ fun TelaCreate(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Row(
-                Modifier
+                modifier
                     .padding(16.dp)
             ) {
                 TextField(
@@ -119,7 +119,7 @@ fun TelaCreate(
                 )
             }
             Row(
-                Modifier
+                modifier
                     .padding(16.dp)
             ) {
                 TextField(
@@ -151,7 +151,7 @@ fun TelaCreate(
                 )
             }
             Row(
-                Modifier
+                modifier
                     .padding(16.dp)
             ) {
                 TextField(
@@ -183,7 +183,7 @@ fun TelaCreate(
                 )
             }
             Row(
-                Modifier
+                modifier
                     .padding(16.dp)
             ) {
                 TextField(
@@ -215,7 +215,7 @@ fun TelaCreate(
                 )
             }
             Row(
-                Modifier
+                modifier
                     .padding(16.dp)
             ) {
                 OutlinedButton(
