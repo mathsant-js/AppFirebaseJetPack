@@ -227,6 +227,7 @@ fun TelaCreate(
                            telefone = ""
                            mensagem = ""
                         }
+                        navController.popBackStack()
                     },
                     colors = ButtonColors(
                         containerColor = Color(26,26,26),

@@ -186,7 +186,8 @@ fun MenuUsuario(
        IconButton(onClick = { expanded = true }) {
            Icon(
                imageVector = Icons.Default.MoreVert, // 3 pontinhos
-               contentDescription = "Menu"
+               contentDescription = "Menu",
+               tint = Color.Black
            )
        }
 
