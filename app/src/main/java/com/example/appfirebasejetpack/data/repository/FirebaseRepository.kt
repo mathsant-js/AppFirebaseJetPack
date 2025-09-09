@@ -32,7 +32,9 @@ class FirebaseRepository {
     fun updateUser(id: String, nome: String, email: String, telefone: String, mensagem: String) {
         val updates = mapOf(
             "nome" to nome,
-            "email" to email
+            "email" to email,
+            "telefone" to telefone,
+            "mensagem" to mensagem
         )
         usuariosRef.child(id).updateChildren(updates)
     }

@@ -1,5 +1,6 @@
 package com.example.appfirebasejetpack.ui.screens
 
+import android.R.attr.id
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -56,7 +57,6 @@ import com.example.appfirebasejetpack.viewmodel.AuthViewModel
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun Dashboard(
-    modifier: Modifier,
     navController: NavController,
     authViewModel: AuthViewModel
 ) {
@@ -133,8 +133,12 @@ fun Dashboard(
 
            ListaUsuarios(
                usuarios = listaUsuarios,
-               onEditClick = { usuario -> },
-               onDeleteClick = {usuario -> }
+               onEditClick = { usuario ->
+                   usuario.id.let { id ->
+                       navController.navigate("telaUpdate/$id")
+                   }
+               },
+               onDeleteClick = { usuario -> }
            )
        }
    }

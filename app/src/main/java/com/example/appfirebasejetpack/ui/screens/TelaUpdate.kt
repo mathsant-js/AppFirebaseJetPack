@@ -21,32 +21,48 @@ import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.example.appfirebasejetpack.data.repository.FirebaseRepository
 import com.example.appfirebasejetpack.ui.navigation.Routes
 import com.example.appfirebasejetpack.viewmodel.AuthViewModel
-import java.lang.reflect.Modifier
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TelaUpdate(
     navController: NavController,
-    authViewModel: AuthViewModel
+    authViewModel: AuthViewModel,
+    usuarioId: String
 ) {
-    var nome by remember { mutableStateOf(TextFieldValue("")) }
-    var email by remember { mutableStateOf(TextFieldValue("")) }
-    var telefone by remember { mutableStateOf(TextFieldValue("")) }
-    var mensagem by remember { mutableStateOf(TextFieldValue("")) }
+    val repo = remember { FirebaseRepository() }
+
+    var nome by remember { mutableStateOf("") }
+    var email by remember { mutableStateOf("") }
+    var telefone by remember { mutableStateOf("") }
+    var mensagem by remember { mutableStateOf("") }
+
+    LaunchedEffect(usuarioId) {
+        repo.showUsers { lista ->
+            lista.find { it.id == usuarioId}?.let { usuario ->
+                nome = usuario.nome
+                email = usuario.email
+                telefone = usuario.telefone
+                mensagem = usuario.mensagem
+            }
+        }
+    }
+
     Scaffold(
         topBar = {
             CenterAlignedTopAppBar(
@@ -78,7 +94,7 @@ fun TelaUpdate(
         }
     ) { padding ->
         Column(
-            androidx.compose.ui.Modifier
+            Modifier
                 .background(Color(26, 26, 26))
                 .fillMaxSize()
                 .padding(padding)
@@ -86,7 +102,7 @@ fun TelaUpdate(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Row(
-                androidx.compose.ui.Modifier
+                Modifier
                     .padding(16.dp)
             ) {
                 TextField(
@@ -118,7 +134,7 @@ fun TelaUpdate(
                 )
             }
             Row(
-                androidx.compose.ui.Modifier
+                Modifier
                     .padding(16.dp)
             ) {
                 TextField(
@@ -150,7 +166,7 @@ fun TelaUpdate(
                 )
             }
             Row(
-                androidx.compose.ui.Modifier
+                Modifier
                     .padding(16.dp)
             ) {
                 TextField(
@@ -182,7 +198,7 @@ fun TelaUpdate(
                 )
             }
             Row(
-                androidx.compose.ui.Modifier
+               Modifier
                     .padding(16.dp)
             ) {
                 TextField(
@@ -214,11 +230,16 @@ fun TelaUpdate(
                 )
             }
             Row(
-                androidx.compose.ui.Modifier
+                Modifier
                     .padding(16.dp)
             ) {
                 OutlinedButton(
-                    onClick = {},
+                    onClick = {
+                        repo.updateUser(
+                            id = usuarioId, nome = nome, email = email, telefone = telefone, mensagem = mensagem
+                        )
+                        navController.popBackStack()
+                    },
                     colors = ButtonColors(
                         containerColor = Color(26,26,26),
                         contentColor = Color.White,
