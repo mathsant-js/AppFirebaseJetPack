@@ -7,7 +7,6 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
-import com.example.appfirebasejetpack.data.model.User
 import com.example.appfirebasejetpack.ui.screens.Dashboard
 import com.example.appfirebasejetpack.ui.screens.TelaCadastro
 import com.example.appfirebasejetpack.ui.screens.TelaCreate
