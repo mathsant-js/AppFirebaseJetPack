@@ -23,6 +23,7 @@ import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material.icons.filled.MoreVert
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.ButtonColors
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CenterAlignedTopAppBar
@@ -35,6 +36,7 @@ import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedCard
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -62,6 +64,8 @@ fun Dashboard(
 ) {
     val repo = remember { FirebaseRepository() }
     var listaUsuarios by remember { mutableStateOf(listOf<User>()) }
+
+    var usuarioParaDeletar by remember { mutableStateOf<User?>(null) }
 
     LaunchedEffect(Unit) {
         repo.showUsers { lista ->
@@ -138,8 +142,35 @@ fun Dashboard(
                        navController.navigate(Routes.telaUpdate(id))
                    }
                },
-               onDeleteClick = { usuario -> }
+               onDeleteClick = { usuario ->
+                   usuarioParaDeletar = usuario
+               }
            )
+           usuarioParaDeletar?.let { usuario ->
+               AlertDialog(
+                   onDismissRequest = { usuarioParaDeletar = null },
+                   title = { Text("Excluir Usuário") },
+                   text = { Text("Tem certeza que deseja exluir o usuário ${usuario.nome}?") },
+                   containerColor = Color(30,30,30),
+                   confirmButton = {
+                       TextButton(
+                           onClick = {
+                               usuario.id.let { id ->
+                                   repo.deleteUser(id)
+                               }
+                               usuarioParaDeletar = null
+                           }
+                       ) {
+                           Text("Confimar", color = Color.Red)
+                       }
+                   },
+                   dismissButton = {
+                       TextButton(onClick = { usuarioParaDeletar = null }) {
+                           Text("Cancelar")
+                       }
+                   }
+               )
+           }
        }
    }
 
